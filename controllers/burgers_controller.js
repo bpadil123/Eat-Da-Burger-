@@ -18,14 +18,19 @@ router.post("/", function (req, res) {
   });
 });
 
-router.put("/:id", function (req, res) {
-  var id = req.params.id;
-
-  console.log("id", id);
-
-  burger.updateOne(id, function () {
-      res.redirect("/");
-  });
+// Update a burger devoured status.
+router.put("/api/burgers/:id", function (req, res) {
+    let condition = "id = " + req.params.id;
+    console.log("Condition: ", condition);
+    
+    burger.update({ devoured: req.body.devoured }, condition, 
+        function (result)  {
+            if (result.changedRows === 0) {
+                return res.status(404).end();
+            }
+            res.status(200).end();
+        }
+    );
 });
 
 

@@ -1,33 +1,28 @@
 <h1>Eat Da Burger, Eat it Now!</h1>
 <br>
 
-<div id='avail'>
-    <h2>Burgers Available to Eat:</h2>
-    <ul>
-        {{#each burgers}} {{#unless this.devoured}}
-        <li>
-            {{this.id}}. {{this.burger_name}}
-
-            <form action="/{{this.id}}?_method=PUT" method="POST">
-                <input type="hidden" name="devoured" value="false">
-                <button class="btn btn-warning" type="submit">Eat Me!</button>
-            </form>
-
-        </li>
-        {{/unless}} {{/each}}
-    </ul>
-</div>
+   <div class="row">
+        <div class="col-md-6 menu">
+            <h2>On the Menu</h2>
+            <hr/>
+            {{#each burgers}} 
+                {{#unless this.devoured}}
+                <h5>{{this.burger_name}}</h5>
+                <button type="button" class="btn eatButton" data-id="{{id}}" data-devoured="{{devoured}}">Eat it.</button>
+                {{/unless}} 
+            {{/each}}
+        </div>
 <div id='devoured'>
-    <h2>Burgers That Have <br>Been Devoured: </h2>
-
-    <ul>
-        {{#each burgers}} {{#if this.devoured}}
-        <li>
-            {{this.id}}. {{this.burger_name}}
-        </li>
-        {{/if}} {{/each}}
-    </ul>
-</div>
+            <h2>Devoured Burgers</h2>
+            <hr/>
+            {{#each burgers}} 
+                {{#if this.devoured}}
+                <h5>{{this.burger_name}}</h5>
+                {{/if}} 
+            {{/each}}
+            <br/><br/>
+        </div>
+    </div>
 
 <div id='add'>
     <h2>Add a Burger: </h2>

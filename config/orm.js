@@ -22,10 +22,11 @@ var orm = {
         });
     },
 
-    updateOne: function (id, cb) {
-        var queryString = "UPDATE burgers SET devoured = true WHERE id = ?";
 
-        connection.query(queryString, [id], function (err, result) {
+    update: function (table, objColVals, condition, cb) {
+        var queryString = `UPDATE ${table} SET ? WHERE ${condition}`
+        console.log(queryString);
+        connection.query(queryString, [objColVals], function (err, result) {
             if (err) {
                 throw err;
             }
@@ -33,5 +34,16 @@ var orm = {
         });
     }
 };
+    // updateOne: function (id, cb) {
+    //     var queryString = "UPDATE burgers SET devoured = true WHERE id = ?";
+
+    //     connection.query(queryString, [id], function (err, result) {
+    //         if (err) {
+    //             throw err;
+    //         }
+    //         cb(result);
+    //     });
+    // }
+
 
 module.exports = orm;
